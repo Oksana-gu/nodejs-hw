@@ -9,7 +9,7 @@
     "start": "node src/server.js"
   },
   "repository": {
-    "type": "git",
+    "type": "module",
     "url": "git+https://github.com/Oksana-gu/nodejs-hw.git"
   },
   "keywords": [],
