@@ -13,23 +13,29 @@ const currentPage = Number(page);
 const currentPerPage = Number(perPage);
 
 let notesQuery = Note.find();
-
 if (tag) {
 notesQuery = notesQuery.where("tag").equals(tag);
 }
 if (search) {
-notesQuery = notesQuery.where("title", {
-$regex: search,
-$options: "i",
+notesQuery = notesQuery.where({
+$or: [
+{ title: { $regex: search, $options: "i" } },
+{ content: { $regex: search, $options: "i" } },
+],
 });
 }
-const totalNotes = await notesQuery.clone().countDocuments();
+
+const [notes, totalNotes] = await Promise.all([
+notesQuery
+.clone()
+.skip((currentPage - 1) * currentPerPage)
+.limit(currentPerPage),
+
+notesQuery.clone().countDocuments(),
+
+]);
 
 const totalPages = Math.ceil(totalNotes / currentPerPage);
-
-const notes = await notesQuery
-.skip((currentPage - 1) * currentPerPage)
-.limit(currentPerPage);
 
 res.status(200).json({
 page: currentPage,
