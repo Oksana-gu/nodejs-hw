@@ -3,6 +3,7 @@ import dns from 'node:dns';
 import express from 'express';
 import cors from 'cors';
 import { errors } from 'celebrate';
+import cookieParser from 'cookie-parser';
 
 import { connectMongoDB } from './db/connectMongoDB.js';
 
@@ -23,6 +24,9 @@ app.use(cors());
 app.use(notesRoutes);
 
 app.use(notFoundHandler);
+app.use(express.json());
+
+app.use(cookieParser());
 app.use(errors());
 app.use(errorHandler);
 const startServer = async () => {
@@ -32,5 +36,7 @@ const startServer = async () => {
     console.log(`🚀 Server is running on port ${PORT}`);
   });
 };
+
+
 
 startServer();
