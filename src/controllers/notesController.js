@@ -104,8 +104,7 @@ export const deleteNote = async (req, res) => {
     404,
     'Note not found',
   );
-};
-
+}
   res.status(200).json(note);
 };
 export const createNote = async (req, res) => {

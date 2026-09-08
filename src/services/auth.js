@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+import crypto from 'node:crypto';
 
 import { Session } from '../models/session.js';
 
@@ -8,8 +8,13 @@ ONE_DAY,
 } from '../constants/time.js';
 
 export const createSession = async (userId) => {
-const accessToken = uuidv4();
-const refreshToken = uuidv4();
+const accessToken = crypto
+  .randomBytes(30)
+  .toString('base64');
+
+const refreshToken = crypto
+  .randomBytes(30)
+  .toString('base64');
 
 const session = await Session.create({
 userId,
