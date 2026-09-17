@@ -39,9 +39,7 @@ delete object.password;
 return object;
 };
 
-userSchema.pre("save", function (next) { if (!this.username) { this.username = this.email; } next();
-
-
+userSchema.pre("save", function (next) { if (!this.username) { this.username = this.email; };
 next();
 });
 
