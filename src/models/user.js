@@ -18,6 +18,11 @@ password: {
   type: String,
   required: true,
   minlength: 8,
+    },
+avatar: {
+  type: String,
+  default:
+    'https://ac.goit.global/fullstack/react/default-avatar.jpg',
 },
 
 },
@@ -35,11 +40,14 @@ return object;
 };
 
 userSchema.pre('save', function (next) {
-if (!this.username) {
-this.username = this.email;
-}
+  if (this.isModified('email') || !this.username) {
+    this.username = this.email;
+  }
+
 
 next();
 });
 
 export const User = model('User', userSchema);
+
+

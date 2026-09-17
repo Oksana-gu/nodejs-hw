@@ -4,7 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import { errors } from 'celebrate';
 import cookieParser from 'cookie-parser';
-
+import userRoutes from './routes/userRoutes.js';
 import { connectMongoDB } from './db/connectMongoDB.js';
 
 import { logger } from './middleware/logger.js';
@@ -27,7 +27,7 @@ app.use(cors());
 
 app.use(authRoutes);
 app.use(notesRoutes);
-
+app.use(userRoutes);
 app.use(notFoundHandler);
 app.use(errors());
 app.use(errorHandler);
