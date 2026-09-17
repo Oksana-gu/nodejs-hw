@@ -21,7 +21,7 @@ import {
 const router = Router();
 
 router.post(
-  '/register',
+  '/auth/register',
   celebrate({
     [Segments.BODY]: registerUserSchema,
   }),
@@ -29,7 +29,7 @@ router.post(
 );
 
 router.post(
-  '/login',
+  '/auth/login',
   celebrate({
     [Segments.BODY]: loginUserSchema,
   }),
@@ -37,12 +37,12 @@ router.post(
 );
 
 router.post(
-  '/refresh',
+  '/auth/refresh',
   refreshUserSession,
 );
 
 router.post(
-  '/logout',
+  '/auth/logout',
   logoutUser,
 );
 router.post(
